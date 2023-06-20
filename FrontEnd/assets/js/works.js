@@ -32,7 +32,7 @@ fetch('http://localhost:5678/api/works', { method: 'GET' })
 
     // Création des boutons de filtres
     const category = works.map(works => works.category);
-    // console.log(category);
+    console.log(category);
     // récupérer les catégories uniques
     const distinctCat = [];
     const map = new Map();
@@ -45,10 +45,9 @@ fetch('http://localhost:5678/api/works', { method: 'GET' })
             });
         }
     };
-    // console.log(distinctCat);
+    console.log(distinctCat);
     
     // générer les boutons de filtres
-
     function generateBtns(distinctCat) {
       const filters = document.querySelector(".filters");
       const btnElementAll = document.createElement("button");
@@ -69,7 +68,7 @@ fetch('http://localhost:5678/api/works', { method: 'GET' })
     generateBtns(distinctCat);
 
 // Ajout du listener pour filtrer les pièces non abordables
-/* const boutonFiltrer = document.querySelector(".btn-filtrer");
+/*const boutonFiltrer = document.querySelector(".btn-filtrer");
 boutonFiltrer.addEventListener("click", function () {
    const piecesFiltrees = pieces.filter(function (piece) {
        return piece.disponibilite;
@@ -77,19 +76,32 @@ boutonFiltrer.addEventListener("click", function () {
    // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
   document.querySelector(".fiches").innerHTML = "";
   genererPieces(piecesFiltrees);
-}); */
+});*/
 
   // Ajout du listener sur chaque bouton filtre
   let filterBtn = document.querySelectorAll(".button");
-
   for (let j = 0; j < filterBtn.length; j++) {
     filterBtn[j].addEventListener("click", filterWorks);
-    console.log(filterBtn[j]);
+    //console.log(filterBtn[j]);
   }
 
   // fonction pour filtrer
-  function filterWorks() {
-      works.filter(function (work) {
-        })
-        }
-  }) 
+  function filterWorks(event) {
+    const btnId = parseInt(event.target.id);
+    console.log(btnId);
+    let filteredWorks;
+  
+    if (btnId === 0) {
+      // Cliquer Bouton "Tous" > afficher tous les éléments
+      filteredWorks = works;
+    } else {
+      // Filtrer les éléments en fonction de l'ID de la catégorie du bouton cliqué
+      filteredWorks = works.filter(work => work.category.id === btnId);
+    };
+      console.log(filteredWorks);
+         // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
+      document.querySelector(".gallery").innerHTML = "";
+      generateWorks(filteredWorks);
+  };
+
+})
