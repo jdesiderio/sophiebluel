@@ -35,12 +35,13 @@ function generateWorks(works){
   });
 };
 
+//Récupération des catégories pour les filtres
 function loadCat() {
   fetch(root + "categories", { method: 'GET' })
   .then((response) => response.json())
   .then((json) => { 
     categories = json;
-    console.log(categories);
+    //console.log(categories);
     generateBtns(categories);
 
     // Ajout du listener sur chaque bouton filtre
@@ -58,7 +59,6 @@ function generateBtns(categories) {
   const filters = document.querySelector(".filters");
   const btnElementAll = document.createElement("button");
   btnElementAll.classList.add("button");
-  // btnElementAll.setAttribute("id", "0");
   btnElementAll.innerText = "Tous";
   filters.appendChild(btnElementAll);
 
