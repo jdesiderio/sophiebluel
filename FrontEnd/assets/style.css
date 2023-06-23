@@ -84,6 +84,8 @@ h2{
 	font-size: 30px;
 	color: #1D6154;
 }
+
+/* nav */
 nav ul {
 	display: flex;
 	align-items: center;
@@ -99,7 +101,7 @@ li:hover, a:hover {
 	color: #B1663C;
 }
 
-nav li a {
+a {
 	padding: 0 10px;
 	color: black;
 	text-decoration: none;
@@ -109,12 +111,13 @@ nav li a {
 	font-weight: 800;
 }
 
+/* introduction */
 #introduction {
 	display: flex;
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
 }
 #introduction img {
 	display: block;
@@ -137,6 +140,22 @@ nav li a {
 	margin-bottom: 1em;
 }
 
+/****** GALLERY *******/ 
+
+.port-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.port-title div {
+	margin-left: 20px;
+	margin-bottom: 30px;
+}
+
+/* filters */
+
 .filters {
 	display: flex;
 	flex-direction: row;
@@ -146,7 +165,7 @@ nav li a {
 	gap: 10px;
 }
 
-.button {
+.filter-btn {
 	height: 40px;
 	border-radius: 60px;
 	border: solid 1px #1D6154;
@@ -160,10 +179,12 @@ nav li a {
 	color: #1D6154;
 }
 
-.button:hover {
+.filter-btn:hover {
 	background-color: #1D6154;
 	color: white;
 }
+
+/* Portfolio */
 
 .gallery {
 	width: 100%;
@@ -176,6 +197,9 @@ nav li a {
 .gallery img {
 	width: 100%;
 }
+
+
+/***** FORMS *****/
 
 #contact, #login {
 	width: 50%;
@@ -236,10 +260,43 @@ input[type="submit"]{
 	color: #B1663C;
 }
 
-
+/* Footer */
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+
+/****** ADMIN VIEW *******/
+.admin-menu, .edition {
+	background-color: black;
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.edition-btn {
+	padding: 10px 15px;
+	margin: 10px;
+	border-radius: 50px;
+	background-color: white;
+	border: none;
+}
+
+.modify {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 14px;
+	color: black;
+	margin: 10px 50px;
+}
+
+.hidden {
+	display: none;
+}
