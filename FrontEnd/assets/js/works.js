@@ -51,7 +51,7 @@ function generateWorks(works){
   });
 };
 
-const userAuth = window.sessionStorage.getItem("savedToken");
+const userAuth = sessionStorage.getItem("savedToken");
 if (userAuth)  {
   // Créer la barre admin
   const body = document.querySelector("body");
@@ -75,7 +75,7 @@ if (userAuth)  {
   intro.append(modifyIntro);
   const projects = document.querySelector(".port-title");
   const modifyProj = document.createElement("div");
-  modifyProj.innerHTML = `<a href="#">
+  modifyProj.innerHTML = `<a href="#modalProj" class="js-modal">
                             <i class="fa-regular fa-pen-to-square"></i>
                             modifier
                           </a>`;
@@ -90,7 +90,7 @@ if (userAuth)  {
   if (log) {
     log.addEventListener("click", function(e) {
       //e.preventDefault();
-      window.sessionStorage.removeItem("savedToken");
+      sessionStorage.removeItem("savedToken");
       log.innerText= "login";
       //window.location.href = "index.html";
       document.querySelector(".admin-menu").classList.add("hidden");
@@ -113,6 +113,8 @@ if (logout) {
     document.querySelector(".filters").classList.remove("hidden");
   });
 }*/
+
+
 
 // générer les boutons de filtres
 function generateBtns(categories) {

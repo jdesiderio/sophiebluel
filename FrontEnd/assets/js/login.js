@@ -1,4 +1,4 @@
-const userAuth = window.sessionStorage.getItem("savedToken");
+const userAuth = sessionStorage.getItem("savedToken");
 
 // pour les erreurs
 let errorDisplayed = false;
@@ -33,7 +33,7 @@ function sendLoginRequest(email, password) {
   })
   .then(responseData => {
       console.log(responseData.token);
-      window.sessionStorage.setItem("savedToken", responseData.token);
+      sessionStorage.setItem("savedToken", responseData.token);
       //errorDisplayed = false;
       window.location.href = "index.html";
     })
