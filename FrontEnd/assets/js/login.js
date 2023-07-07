@@ -32,7 +32,7 @@ function sendLoginRequest(email, password) {
     }
   })
   .then(responseData => {
-      console.log(responseData.token);
+      //console.log(responseData.token);
       sessionStorage.setItem("savedToken", responseData.token);
       //errorDisplayed = false;
       window.location.href = "index.html";

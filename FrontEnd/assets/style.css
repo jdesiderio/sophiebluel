@@ -79,11 +79,17 @@ h1 > span {
 ;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154;
+}
+
+h3 {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	text-align: center;
 }
 
 /* nav */
@@ -166,17 +172,20 @@ a {
 	gap: 10px;
 }
 
-.filter-btn {
+.btn {
 	height: 40px;
 	border-radius: 60px;
 	border: solid 1px #1D6154;
-	background-color: white;
 	min-width: 100px;
 	padding-left: 10px;
 	padding-right: 10px;
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
+}
+
+.filter-btn {
+	background-color: white;
 	color: #1D6154;
 }
 
@@ -258,7 +267,7 @@ input[type="submit"]{
 
 .div-error {
 	padding-top: 5px;
-	color: #B1663C;
+	color: #D65353;
 }
 
 /* Footer */
@@ -315,17 +324,100 @@ footer nav ul {
 	justify-content: center;
 	align-items: center;
 	animation: fadeIn 200ms both;
+	box-sizing: border-box;
 }
 
 .modal-wrapper {
 	overflow: auto;
 	width: 630px;
 	height: 730px;
-	max-width: 100vw;
-	max-height: 100vh;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh-20px);
 	background-color: white;
 	border-radius: 10px;
+	padding: 50px 100px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center ;
 }
+
+.js-modal-close {
+	border: none;
+	background-color: white;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	cursor: pointer;
+}
+
+.edit-gallery {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		grid-column-gap: 10px;
+		grid-row-gap: 15px;
+		margin-top: 45px;
+		padding-bottom: 40px;
+		border-bottom: solid 2px #B3B3B3;
+	}
+	
+figure {
+	position: relative;
+}
+
+.thumbnail {
+	width: 90%;
+}
+
+.delete, .move {
+	border: none;
+	background-color: black;
+	color: white;
+	height: 17px;
+	width: 17px;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+}	
+
+.delete {
+	position: absolute;
+	right: 15px; 
+  top: 5px; 
+}
+
+.move {
+	position: absolute;
+	right: 35px; 
+  top: 5px; 
+}
+
+.edit-gallery a {
+	padding-left: 0;
+}
+
+.btn-add {
+	background-color: #1D6154;
+	color: white;
+	width: 240px;
+	margin: 20px 0;
+	padding: 10px;
+}
+
+.btn-delete {
+	border: none;
+	background-color: white;
+	color: #D65353;
+	font-family: 'syne';
+	font-weight: 400;
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
 
 @keyframes fadeIn {
 	from {

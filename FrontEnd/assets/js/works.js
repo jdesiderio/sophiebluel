@@ -8,6 +8,7 @@ function loadWorks() {
     works = json;
     // console.log(works);
     generateWorks(works);
+    displayEditWorks(works);
   });
 };
 loadWorks();
@@ -32,7 +33,7 @@ function loadCat() {
 loadCat();
 
 // Générer les fiches du portfolio
-function generateWorks(works){
+async function generateWorks(works){
   works.forEach(work => {
     // Récupération de l'élément du DOM qui accueillera les fiches
     const gallery = document.querySelector(".gallery");
@@ -116,18 +117,20 @@ if (logout) {
 
 
 
+
+
 // générer les boutons de filtres
 function generateBtns(categories) {
   const filters = document.querySelector(".filters");
   const btnElementAll = document.createElement("button");
-  btnElementAll.classList.add("filter-btn");
+  btnElementAll.classList.add("filter-btn", "btn");
   btnElementAll.innerText = "Tous";
   filters.appendChild(btnElementAll);
 
   for (let j = 0; j < categories.length; j++) {
   const btn = categories[j];
   const btnElement = document.createElement("button");
-  btnElement.classList.add("filter-btn");
+  btnElement.classList.add("filter-btn", "btn");
   btnElement.setAttribute("id", j+1);
   btnElement.innerText = btn.name;
   filters.appendChild(btnElement);
