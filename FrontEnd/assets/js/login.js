@@ -1,5 +1,3 @@
-const userAuth = sessionStorage.getItem("savedToken");
-
 // pour les erreurs
 let errorDisplayed = false;
 

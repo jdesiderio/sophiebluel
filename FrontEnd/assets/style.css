@@ -228,21 +228,77 @@ a {
 	margin-bottom: 20px;
 }
 
-#contact form, #login form {
+#contact form, #login form, .add-form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #login input {
+#contact input, #login input, .add-form input, .add-form select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact label, #login label {
+.add-form {
+	width: 80%;
+}
+
+.img-label {
+	background-color: #E8F1F6;
+	height: 170px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.img-label i {
+	font-size: 58px;
+	color: #B9C5CC;
+	margin: 15px;
+}
+
+.add-pic-btn {
+	color: #306685;
+	text-align: center;
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background: #CBD6DC;
+	line-height: 36px;
+}
+
+.pic-info {
+	color: #444;
+	font-size: 10px;
+	font-weight: 400;
+	margin-top: 10px;
+}
+
+.img-label input[type="file"] {
+	display: none;
+}
+
+.submit-btn {
+	width: 50%;
+	margin: auto;
+}
+
+.preview-img {
+	object-fit: contain;
+	max-height: 170px;
+}
+
+
+.add-form div {
+	margin: 35px 0;
+	border-bottom: solid 2px #B3B3B3;
+}
+
+#contact label, #login label, .add-form label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -352,6 +408,15 @@ footer nav ul {
 	cursor: pointer;
 }
 
+.modal-return {
+	border: none;
+	background-color: white;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	cursor: pointer;
+}
+
 .edit-gallery {
 		width: 100%;
 		display: grid;
@@ -417,6 +482,7 @@ figure {
 	font-size: 14px;
 	margin-bottom: 20px;
 }
+
 
 
 @keyframes fadeIn {
