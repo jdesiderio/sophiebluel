@@ -13,15 +13,15 @@ const openModal = function(e) {
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
   modal.addEventListener("click", closeModal);
-  const closeBtn = document.createElement("button");
+  /*const closeBtn = document.createElement("button");
   closeBtn.classList.add("js-modal-close");
   const closeMark = document.createElement("i");
   closeMark.classList.add("fa-solid", "fa-xmark", "fa-xl");
   closeBtn.appendChild(closeMark);
-  document.querySelector(".modal-wrapper").appendChild(closeBtn);
+  document.querySelector(".modal-wrapper").appendChild(closeBtn);*/
   modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
   modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
-}
+};
 
 const closeModal = function(e) {
   if (modal === null) return;
@@ -34,15 +34,16 @@ const closeModal = function(e) {
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
   modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
+  modal.classList.remove("js-modal-close");
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
   modal = null;
-}
+};
 
 const stopPropagation = function(e) {
   e.stopPropagation();
-}
+};
 
-const focusInModal = function (e) {
+const focusInModal = function(e) {
   e.preventDefault();
   //console.log(focusables);
   let index = focusables.findIndex(f => f === modal.querySelector(":focus"));
@@ -50,25 +51,25 @@ const focusInModal = function (e) {
     index--;
   } else {
     index++;
-  };
+  }
   if (index >= focusables.length) {
     index = 0;
-  };
+  }
   if (index < 0) {
     index = focusables.length - 1;
-  };
+  }
   focusables[index].focus();
-}
+};
 
 document.querySelectorAll(".js-modal").forEach(a => {
   a.addEventListener("click", openModal);
-})
+});
 
 window.addEventListener("keydown", function(e) {
   if (e.key === "Escape" || e.key === "Esc") {
     closeModal(e);
-  };
+  }
   if (e.key === "Tab" && modal !== null) {
     focusInModal(e);
-  };
-})
+  }
+});

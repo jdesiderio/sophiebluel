@@ -9,7 +9,7 @@ menuLinks.forEach(menuLink => {
   }
   
   // Ajouter un écouteur d'événement au clic (pour ancres et autres)
-  menuLink.addEventListener("click", function(e) {
+  menuLink.addEventListener("click", function() {
     // Supprimer la classe active de tous les liens
     menuLinks.forEach(link => {
       link.classList.remove("current");

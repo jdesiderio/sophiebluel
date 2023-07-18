@@ -1,23 +1,24 @@
 const root = "http://localhost:5678/api/";
 
-// Récupération des fiches
-function loadWorks() {
-  fetch(root + "works", { method: 'GET' })
-  .then((response) => response.json())
-  .then((json) => { 
+async function loadWorks() {
+  try {
+    const response = await fetch(root + "works", { method: 'GET' });
+    const json = await response.json();
+    
     works = json;
-    // console.log(works);
     generateWorks(works);
     generateEditWorks(works);
-  });
-};
+  } catch (error) {
+    console.log("Une erreur s'est produite lors du chargement des fiches.", error);
+  }
+}
 loadWorks();
 
 //Récupération des catégories
-function loadCat() {
-  fetch(root + "categories", { method: 'GET' })
-  .then((response) => response.json())
-  .then((json) => { 
+async function loadCat() {
+  try {
+    const response = await fetch(root + "categories", { method: 'GET' });
+    const json = await response.json();
     categories = json;
     //console.log(categories);
     generateBtns(categories);
@@ -28,12 +29,14 @@ function loadCat() {
       btn.addEventListener("click", filterWorks);
     });
     //console.log(filterBtn);
-  });
-};
+  } catch (error) {
+    console.log("Une erreur s'est produite lors du chargement des catégories.", error);
+  }
+}
 loadCat();
 
 // Générer les fiches de la galerie
-async function generateWorks(works) {
+function generateWorks(works) {
   const gallery = document.querySelector(".gallery");
 
   gallery.innerHTML = "";
@@ -53,20 +56,20 @@ async function generateWorks(works) {
     workElement.appendChild(imageElement);
     workElement.appendChild(titleElement);
   });
-};
-
+}
 
 //Générer la galerie à éditer
-async function generateEditWorks(works) {
+function generateEditWorks(works) {
   const modalContent = document.querySelector(".modal-wrapper");
 
   modalContent.innerHTML = "";
 
-  /*const closeBtn = document.createElement("button");
+  const closeBtn = document.createElement("button");
   closeBtn.classList.add("js-modal-close");
   const closeMark = document.createElement("i");
   closeMark.classList.add("fa-solid", "fa-xmark", "fa-xl");
-  closeBtn.appendChild(closeMark);*/
+  closeBtn.appendChild(closeMark);
+  closeBtn.addEventListener("click", closeModal);
 
   const title = document.createElement("h3");
   title.innerText = "Galerie photo";
@@ -86,6 +89,7 @@ async function generateEditWorks(works) {
   btnDel.innerHTML = "Supprimer la galerie";
 
   //modalContent.appendChild(closeBtn);
+  modalContent.appendChild(closeBtn);
   modalContent.appendChild(title);
   modalContent.appendChild(editGallery);
   modalContent.appendChild(btnAdd);
@@ -109,8 +113,8 @@ async function generateEditWorks(works) {
     bin.innerHTML = `<i class="fa-regular fa-trash-can fa-xs"></i>`;
     bin.addEventListener("click", function(e) {
       e.preventDefault();
-      deleteWorks(id, modalContent);
-    })
+      deleteWorks(id);
+    });
     
     const move = document.createElement("button");
     move.classList.add("move");
@@ -127,7 +131,7 @@ async function generateEditWorks(works) {
     editWork.appendChild(move);
     editWork.appendChild(editLink);
   });
-};
+}
 
 // générer les boutons de filtres
 function generateBtns(categories) {
@@ -144,16 +148,16 @@ function generateBtns(categories) {
   btnElement.setAttribute("id", j+1);
   btnElement.innerText = btn.name;
   filters.appendChild(btnElement);
-  };
-};
+  }
+}
 
 // fonction pour filtrer
-function filterWorks(event) {
+function filterWorks(e) {
   // Filtrer les éléments
-  let filteredWorks = works.filter(work => event.target.id === "" || work.category.id === parseInt(event.target.id));
+  let filteredWorks = works.filter(work => e.target.id === "" || work.category.id === parseInt(e.target.id));
   //console.log(filteredWorks);
   
   // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
   document.querySelector(".gallery").innerHTML = "";
   generateWorks(filteredWorks);
-};
+}

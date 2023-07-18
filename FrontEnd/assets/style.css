@@ -60,7 +60,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 100px;
 }
 
 h1{
@@ -104,11 +104,11 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover, a:hover {
+li:hover, a:hover, .modify a:hover {
 	color: #B1663C;
 }
 
-a {
+nav a {
 	padding: 0 10px;
 	color: black;
 	text-decoration: none;
@@ -118,17 +118,24 @@ a {
 	font-weight: 800;
 }
 
+nav img {
+	height: 22px;
+	width: 22px;
+}
+
 /* introduction */
 #introduction {
 	display: flex;
 	align-items: center;
+	margin-top: 120px;
+	margin-bottom: 120px;
 }
+
 #introduction figure {
 	flex: 1;
 }
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
 }
 
@@ -182,6 +189,7 @@ a {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
+	cursor: pointer;
 }
 
 .filter-btn {
@@ -212,12 +220,13 @@ a {
 /***** FORMS *****/
 
 #contact, #login {
-	width: 50%;
+	width: 35%;
 	margin: auto;
 }
 
 #login {
-	margin-bottom: 250px;
+	margin-top: 120px;
+	margin-bottom: 200px;
 }
 
 #contact > *, #login > * {
@@ -230,9 +239,13 @@ a {
 
 #contact form, #login form, .add-form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
+}
+
+.add-form {
+	width: 80%;
 }
 
 #contact input, #login input, .add-form input, .add-form select {
@@ -240,10 +253,6 @@ a {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-.add-form {
-	width: 80%;
 }
 
 .img-label {
@@ -285,13 +294,18 @@ a {
 .submit-btn {
 	width: 50%;
 	margin: auto;
+	color: white;
+	background-color: #A7A7A7;
+}
+
+.submit-btn:hover {
+	background-color: #1D6154;
 }
 
 .preview-img {
 	object-fit: contain;
 	max-height: 170px;
 }
-
 
 .add-form div {
 	margin: 35px 0;
@@ -327,12 +341,18 @@ input[type="submit"]{
 }
 
 /* Footer */
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+footer {
+	height: 60px;
 }
 
+footer ul {
+	display: flex;
+	justify-content: flex-end;
+}
+
+footer li {
+margin: 20px;
+}
 
 /****** ADMIN VIEW *******/
 .admin-menu, .edition {
@@ -360,7 +380,12 @@ footer nav ul {
 	align-items: center;
 	font-size: 14px;
 	color: black;
-	margin: 10px 50px;
+	margin: 10px 0;
+}
+
+.modify a, .js-modal {
+	color: black;
+	text-decoration: none;
 }
 
 .hidden {
@@ -463,6 +488,8 @@ figure {
 
 .edit-gallery a {
 	padding-left: 0;
+	color: black;
+	text-decoration: none;
 }
 
 .btn-add {
@@ -482,8 +509,6 @@ figure {
 	font-size: 14px;
 	margin-bottom: 20px;
 }
-
-
 
 @keyframes fadeIn {
 	from {

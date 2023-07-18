@@ -1,6 +1,6 @@
 function getToken() {
   return sessionStorage.getItem("savedToken");
-}  
+}
 
 function createAdminPage() {
   const token = getToken();
@@ -40,7 +40,7 @@ function createAdminPage() {
     const log = document.querySelector(".log");
     log.innerText = "logout";
     if (log) {
-      log.addEventListener("click", function(e) {
+      log.addEventListener("click", function() {
         sessionStorage.removeItem("savedToken");
         log.innerText= "login";
         document.querySelector(".admin-menu").classList.add("hidden");
@@ -50,10 +50,10 @@ function createAdminPage() {
       });
     }
   }
-};
+}
 createAdminPage();
 
-async function deleteWorks(id, modalContent) {
+async function deleteWorks(id) {
   const token = getToken();
   if (!token) {
     // Gérer le cas où le token n'est pas disponible
@@ -72,23 +72,28 @@ async function deleteWorks(id, modalContent) {
     if (response.ok) {
       works = works.filter(work => work.id !== id);
       generateWorks(works);
-      //modalContent.innerHTML = "";
       generateEditWorks(works);
     } else {
       throw new Error("Erreur");
     }
   } catch (error) {
-    //console.log(error);
+    console.log("Une erreur s'est produite lors de la suppression", error);
   }
 }
 
-
 //Créer le formulaire d'ajout d'items dans la galerie
-async function createFormAdd(modalContent, categories) {
+function createFormAdd(modalContent, categories) {
   // Vide la page en supprimant tous les éléments du body
   modalContent.innerHTML = "";
 
-  //Créer les boutons de retour
+  //Créer les boutons de retour et de fermeture 
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("js-modal-close");
+  const closeMark = document.createElement("i");
+  closeMark.classList.add("fa-solid", "fa-xmark", "fa-xl");
+  closeBtn.appendChild(closeMark);
+  closeBtn.addEventListener("click", closeModal);
+
   const returnBtn = document.createElement("button");
   returnBtn.classList.add("modal-return");
   const returnMark = document.createElement("i");
@@ -97,7 +102,7 @@ async function createFormAdd(modalContent, categories) {
   returnBtn.addEventListener("click", function() 
     {
       modalContent.innerHTML = "";
-      generateEditWorks(works)
+      generateEditWorks(works);
     });
 
   // Crée un form
@@ -163,6 +168,7 @@ async function createFormAdd(modalContent, categories) {
   form.appendChild(line);
   form.appendChild(submitBtn);
   modalContent.appendChild(returnBtn);
+  modalContent.appendChild(closeBtn);
   modalContent.appendChild(title);
   modalContent.appendChild(form);
   
@@ -230,7 +236,6 @@ async function sendFormData(e, imgInput, modalContent) {
   }
 }
 
-
 function checkImgSize(e, imgLabel) {
   const file = e.target.files[0]; // Récupère le fichier sélectionné
   if (file.size > 4 * 1024 * 1024) {
@@ -238,12 +243,12 @@ function checkImgSize(e, imgLabel) {
     // Réinitialise la valeur de l'input pour permettre à l'utilisateur de sélectionner à nouveau un fichier
     e.target.value = "";
   } else {
-      // La taille du fichier est valide, vous pouvez effectuer d'autres opérations si nécessaire
+      // La taille du fichier est valide
       const imgPreview = document.createElement("img");
       imgPreview.classList.add("preview-img");
       imgPreview.src = URL.createObjectURL(file);
 
-      // Remplace les éléments dans imgLabel par l'image prévisualisée
+      // Remplace les éléments dans imgLabel par l'image sélectionnée
       imgLabel.innerHTML = "";
       imgLabel.appendChild(imgPreview);
     }
