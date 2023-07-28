@@ -2,7 +2,7 @@ const root = "http://localhost:5678/api/";
 
 async function loadWorks() {
   try {
-    const response = await fetch(root + "works", { method: 'GET' });
+    const response = await fetch(root + "works", { method: "GET" });
     const json = await response.json();
     
     works = json;
@@ -17,7 +17,7 @@ loadWorks();
 //Récupération des catégories
 async function loadCat() {
   try {
-    const response = await fetch(root + "categories", { method: 'GET' });
+    const response = await fetch(root + "categories", { method: "GET" });
     const json = await response.json();
     categories = json;
     //console.log(categories);
@@ -37,18 +37,19 @@ loadCat();
 
 // Générer les fiches de la galerie
 function generateWorks(works) {
+  // Récupération de l'élément qui accueillera les fiches
   const gallery = document.querySelector(".gallery");
 
   gallery.innerHTML = "";
 
   works.forEach(work => {
-    // Récupération de l'élément du DOM qui accueillera les fiches
     // Création d’une balise dédiée à une fiche
     const workElement = document.createElement("figure");
     // Création des balises 
     const imageElement = document.createElement("img");
     imageElement.src = work.imageUrl;
     imageElement.alt = work.title;
+    imageElement.setAttribute("id", `img${work.id}`);
     const titleElement = document.createElement("figcaption");
     titleElement.innerText = work.title;
     // On rattache la balise figure au div gallery 

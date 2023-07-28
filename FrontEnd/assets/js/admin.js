@@ -62,7 +62,7 @@ async function deleteWorks(id) {
   }
 
   try {
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    const response = await fetch(root + `works/${id}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -211,7 +211,7 @@ async function sendFormData(e, imgInput, modalContent) {
   formData.append('category', catId);
   
   try {
-    const response = await fetch("http://localhost:5678/api/works", {
+    const response = await fetch(root + "works", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,

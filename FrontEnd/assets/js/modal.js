@@ -13,12 +13,6 @@ const openModal = function(e) {
   modal.removeAttribute("aria-hidden");
   modal.setAttribute("aria-modal", "true");
   modal.addEventListener("click", closeModal);
-  /*const closeBtn = document.createElement("button");
-  closeBtn.classList.add("js-modal-close");
-  const closeMark = document.createElement("i");
-  closeMark.classList.add("fa-solid", "fa-xmark", "fa-xl");
-  closeBtn.appendChild(closeMark);
-  document.querySelector(".modal-wrapper").appendChild(closeBtn);*/
   modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
   modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
 };

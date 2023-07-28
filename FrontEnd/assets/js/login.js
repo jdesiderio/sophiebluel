@@ -1,3 +1,5 @@
+const root = "http://localhost:5678/api/";
+
 // listener sur le formulaire
 const formLogin = document.querySelector(".form-login");
 formLogin.addEventListener("submit", async function (e) {
@@ -18,7 +20,7 @@ async function sendLoginRequest(email, password) {
     password: password
   };
   try {
-    const response = await fetch("http://localhost:5678/api/users/login", {
+    const response = await fetch(root + "users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData)
