@@ -35,34 +35,58 @@ async function loadCat() {
 }
 loadCat();
 
-// Générer les fiches de la galerie
-function generateWorks(works) {
-  // Récupération de l'élément qui accueillera les fiches
-  const gallery = document.querySelector(".gallery");
-
+// Générer la galerie (principale et edition)
+function generateWorks(works, isEditable = false) {
+  const gallerySelector = isEditable ? ".edit-gallery" : ".gallery";
+  const gallery = document.querySelector(gallerySelector);
   gallery.innerHTML = "";
 
   works.forEach(work => {
-    // Création d’une balise dédiée à une fiche
     const workElement = document.createElement("figure");
-    // Création des balises 
+    
     const imageElement = document.createElement("img");
     imageElement.src = work.imageUrl;
     imageElement.alt = work.title;
     imageElement.setAttribute("id", `img${work.id}`);
+    
     const titleElement = document.createElement("figcaption");
     titleElement.innerText = work.title;
-    // On rattache la balise figure au div gallery 
-    gallery.appendChild(workElement);
+
     workElement.appendChild(imageElement);
     workElement.appendChild(titleElement);
+
+    if (isEditable) {
+      imageElement.classList.add("thumbnail");
+      titleElement.innerText = null;
+
+      const bin = document.createElement("button");
+      bin.classList.add("delete");
+      bin.innerHTML = `<i class="fa-regular fa-trash-can fa-xs"></i>`;
+      bin.addEventListener("click", function(e) {
+        e.preventDefault();
+        deleteWorks(work.id);
+      });
+
+      const move = document.createElement("button");
+      move.classList.add("move");
+      move.innerHTML = `<i class="fa-solid fa-up-down-left-right fa-xs"></i>`;
+      
+      const editLink = document.createElement("a");
+      editLink.innerText = "éditer";
+      editLink.setAttribute("href", "#");
+
+      workElement.appendChild(bin);
+      workElement.appendChild(move);
+      workElement.appendChild(editLink);
+    }
+
+    gallery.appendChild(workElement);
   });
 }
 
-//Générer la galerie à éditer
+// Générer la modale contenant la galerie d'édition 
 function generateEditWorks(works) {
   const modalContent = document.querySelector(".modal-wrapper");
-
   modalContent.innerHTML = "";
 
   const closeBtn = document.createElement("button");
@@ -81,6 +105,7 @@ function generateEditWorks(works) {
   const btnAdd = document.createElement("button");
   btnAdd.classList.add("btn", "btn-add");
   btnAdd.innerText = "Ajouter une photo";
+
   btnAdd.addEventListener("click", function() {
     createFormAdd(modalContent, categories);
   });
@@ -89,50 +114,15 @@ function generateEditWorks(works) {
   btnDel.classList.add("btn-delete");
   btnDel.innerHTML = "Supprimer la galerie";
 
-  //modalContent.appendChild(closeBtn);
   modalContent.appendChild(closeBtn);
   modalContent.appendChild(title);
   modalContent.appendChild(editGallery);
   modalContent.appendChild(btnAdd);
   modalContent.appendChild(btnDel);
 
-  editGallery.innerHTML = "";
-
-  works.forEach(work => {
-    // Création d’une balise dédiée à une fiche
-    const editWork = document.createElement("figure");
-    let id = work.id;
-    editWork.setAttribute("id", id);    
-    // Création des balises 
-    const imageElement = document.createElement("img");
-    imageElement.src = work.imageUrl;
-    imageElement.alt = work.title;
-    imageElement.classList.add("thumbnail");
-   
-    const bin = document.createElement("button");
-    bin.classList.add("delete");
-    bin.innerHTML = `<i class="fa-regular fa-trash-can fa-xs"></i>`;
-    bin.addEventListener("click", function(e) {
-      e.preventDefault();
-      deleteWorks(id);
-    });
-    
-    const move = document.createElement("button");
-    move.classList.add("move");
-    move.innerHTML = `<i class="fa-solid fa-up-down-left-right fa-xs"></i>`;
-    
-    const editLink = document.createElement("a");
-    editLink.innerText = "éditer";
-    editLink.setAttribute("href", "#");
-
-    // On rattache la balise figure au div gallery 
-    editGallery.appendChild(editWork);
-    editWork.appendChild(imageElement);
-    editWork.appendChild(bin);
-    editWork.appendChild(move);
-    editWork.appendChild(editLink);
-  });
+  generateWorks(works, true);
 }
+
 
 // générer les boutons de filtres
 function generateBtns(categories) {
